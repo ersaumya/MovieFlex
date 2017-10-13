@@ -1,0 +1,16 @@
+﻿@model MovieFlex.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    <li>Membership Type:@Model.MembershipType.Name</li>
+    <li>Discount Rate:@Model.MembershipType.DiscountRate%</li>
+    @if (Model.BirtDate.HasValue)
+    {
+        <li>BirthDate:@Model.BirtDate.Value.ToShortDateString()</li>
+    }
+</ul>
+

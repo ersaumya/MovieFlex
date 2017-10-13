@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MovieFlex.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Movies Available</h3>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+            <th>#</th>
+            <th class="text-uppercase ">Movie Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>@Html.ActionLink(movie.Name,"Details","Movies",new {id=movie.Id },null)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
