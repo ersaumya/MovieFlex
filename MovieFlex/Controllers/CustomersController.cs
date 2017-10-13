@@ -1,4 +1,5 @@
 ﻿using MovieFlex.Models;
+using MovieFlex.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,6 +19,22 @@ namespace MovieFlex.Controllers
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
+        }
+        public ActionResult New()
+        {
+            var membershipType = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipType
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index","Customers");
         }
         // GET: Customers
         public ActionResult Index()
