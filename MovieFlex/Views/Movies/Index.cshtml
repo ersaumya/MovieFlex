@@ -5,6 +5,11 @@
 }
 
 <h3>Movies Available</h3>
+<p>
+    @Html.ActionLink("New Movies","New","Movies",null,new { @class= "btn btn-success btn-sm" })
+</p>
+
+
 <table class="table table-striped table-hover">
     <thead>
         <tr class="success">
@@ -17,7 +22,8 @@
         {
             <tr>
                 <td>@movie.Id</td>
-                <td>@Html.ActionLink(movie.Name,"Details","Movies",new {id=movie.Id },null)</td>
+                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+               
             </tr>
         }
     </tbody>
