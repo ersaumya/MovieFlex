@@ -22,30 +22,30 @@ namespace MovieFlex.Controllers
             _context.Dispose();
         }
         public ViewResult New()
-         {
-             var genres = _context.Genres.ToList();
- 
-             var viewModel = new MovieFormViewModel
-             {
-                 Genres = genres
-             };
- 
-             return View("MovieForm", viewModel);
+        {
+            var genres = _context.Genres.ToList();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+
+            return View("MovieForm", viewModel);
         }
         public ActionResult Edit(int id)
-         {
-             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
- 
-             if (movie == null)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movie == null)
                 return HttpNotFound();
- 
-             var viewModel = new MovieFormViewModel
-             {
-                 Movie = movie,
-                 Genres = _context.Genres.ToList()
-             };
- 
-             return View("MovieForm", viewModel);
+
+            var viewModel = new MovieFormViewModel(movie)
+            {
+
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
         }
         public ActionResult Index()
         {
@@ -53,36 +53,45 @@ namespace MovieFlex.Controllers
             return View(movies);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
-         {
-             if (movie.Id == 0)
-             {
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
+            if (movie.Id == 0)
+            {
                 movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
-             }
-               else
-             {
+            }
+            else
+            {
                 var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
                 movieInDb.Name = movie.Name;
                 movieInDb.GenreId = movie.GenreId;
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.ReleasedDate = movie.ReleasedDate;
-             }
-            
+            }
+
             _context.SaveChanges();
             return RedirectToAction("Index", "Movies");
-         }
-    
+        }
 
- 
+
+
         public ActionResult Details(int id)
         {
-            var movies = _context.Movies.Include(m =>m.Genre).SingleOrDefault(c => c.Id == id);
+            var movies = _context.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id);
             if (movies == null)
                 return HttpNotFound();
             return View(movies);
         }
-        
+
 
     }
 }
