@@ -23,6 +23,7 @@ namespace MovieFlex.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name="Date of Birth")]
+        [Min18YearsIfaMember]
         public DateTime? BirthDate { get; set; }
     }
 }
