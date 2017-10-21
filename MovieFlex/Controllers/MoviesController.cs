@@ -49,8 +49,8 @@ namespace MovieFlex.Controllers
         }
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
-            return View(movies);
+            
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

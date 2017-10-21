@@ -18,8 +18,9 @@ namespace MovieFlex.Dtos
         public bool IsSubscribedToNewsletter { get; set; }
 
         public byte MembershipTypeId { get; set; }
+        public MembershipTypeDto MembershipType { get; set; }
 
-     
+
         //[Min18YearsIfaMember]
         public DateTime? BirthDate { get; set; }
     }

@@ -2,6 +2,7 @@
 using MovieFlex.Dtos;
 using MovieFlex.Models;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,7 +21,10 @@ namespace MovieFlex.Controllers.Api
         //GET/api/movies/getmovies
         public IHttpActionResult GetMovies()
         {
-            var movieDtos = _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            var movieDtos = _context.Movies
+                .Include(m=>m.Genre)
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>);
             return Ok(movieDtos);
         }
         //GET/api/movies/getmovie/id
