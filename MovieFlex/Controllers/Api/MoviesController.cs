@@ -37,6 +37,7 @@ namespace MovieFlex.Controllers.Api
         }
         //POST/api/movies/CreateMovie
         [HttpPost]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult CreateMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace MovieFlex.Controllers.Api
         }
         //PUT/api/movies/UpdateMovies
         [HttpPut]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult UpdateMovies(int id,MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -62,6 +64,7 @@ namespace MovieFlex.Controllers.Api
         }
         //Delete/api/movies/DeleteMovies
         [HttpDelete]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult DeleteMovies(int id)
         {
             var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);

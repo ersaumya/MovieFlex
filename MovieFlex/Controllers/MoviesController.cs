@@ -21,6 +21,7 @@ namespace MovieFlex.Controllers
         {
             _context.Dispose();
         }
+        [Authorize(Roles =RollName.CanManageMovies)]
         public ViewResult New()
         {
             var genres = _context.Genres.ToList();
@@ -32,6 +33,7 @@ namespace MovieFlex.Controllers
 
             return View("MovieForm", viewModel);
         }
+        [Authorize(Roles =RollName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
@@ -49,11 +51,15 @@ namespace MovieFlex.Controllers
         }
         public ActionResult Index()
         {
+            if (User.IsInRole(RollName.CanManageMovies))
+
+                return View("List");
             
-            return View();
+                return View("ReadOnlyList");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)

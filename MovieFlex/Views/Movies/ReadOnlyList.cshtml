@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MovieFlex.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Movies Available</h3>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+
+
+<table id="movies" class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+            <th>#</th>
+            <th class="text-uppercase ">Movie Title</th>
+            <th class="text-uppercase">Genre</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+           var table= $("#movies").DataTable({
+                ajax: {
+                    url: "/api/movies/",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data:"id"
+                    },
+                    {
+                        data: "name"
+                       
+                    },
+                    {
+                        data: "genre.name"
+                    }
+                   
+                ]
+
+
+
+            });
+        
+        });
+    </script>
+}

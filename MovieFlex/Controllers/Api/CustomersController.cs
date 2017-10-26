@@ -39,6 +39,7 @@ namespace MovieFlex.Controllers.Api
         }
         //POST/API/Customers
         [HttpPost]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
@@ -51,6 +52,7 @@ namespace MovieFlex.Controllers.Api
         }
         //Put/Api/Customers/1
         [HttpPut]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult UpdateCustomer(int id,CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
@@ -67,6 +69,7 @@ namespace MovieFlex.Controllers.Api
         }
         //Delete/Api/Customer/1
         [HttpDelete]
+        [Authorize(Roles =RollName.CanManageMovies)]
         public IHttpActionResult RemoveCustomer(int id)
         {
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);

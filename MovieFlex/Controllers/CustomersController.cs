@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MovieFlex.Controllers
 {
+    
     public class CustomersController : Controller
     {
         private ApplicationDbContext _context;
@@ -73,6 +74,7 @@ namespace MovieFlex.Controllers
             };
             return View("CustomerForm",viewModel);
         }
+      
         // GET: Customers
         public ActionResult Index()
         {
