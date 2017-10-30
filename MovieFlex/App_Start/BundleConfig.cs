@@ -14,7 +14,9 @@ namespace MovieFlex
                        "~/Scripts/bootbox.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/datatables/jquery.datatables.js",
-                      "~/Scripts/datatables/datatables.bootstrap.js"));
+                      "~/Scripts/datatables/datatables.bootstrap.js",
+                      "~/Scripts/toastr.js",
+                      "~/Scripts/typeahead.bundle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -29,6 +31,8 @@ namespace MovieFlex
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-flatly.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/typeahead.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
     }
